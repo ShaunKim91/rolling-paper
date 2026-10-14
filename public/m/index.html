@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6b4dd9">
+  <title>우리 팀 롤링페이퍼</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/mobile.css">
+</head>
+<body data-view="mobile">
+  <header class="top">
+    <div class="brand"><span class="logo">📝</span><span>우리 팀 롤링페이퍼</span><span id="modeTag" class="tag"></span></div>
+    <div class="actions">
+      <button id="inviteBtn" class="btn ghost" type="button">🔗 초대하기</button>
+      <button id="newBtn" class="btn ghost" type="button">➕ 새 롤링페이퍼</button>
+      <button id="csvBtn" class="btn ghost" type="button" hidden>⬇ CSV 보관</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="hero">
+      <h1 id="title">불러오는 중…</h1>
+      <div class="meta">
+        <span id="deadline" class="badge">⏳</span>
+        <span class="badge">📝 <b id="count">0</b>장</span>
+        <span class="badge">♥ <b id="heartTotal">0</b></span>
+        <span class="badge live">🟢 <b id="online">1</b>명 보는 중</span>
+      </div>
+      <p id="mvp" class="mvp" hidden></p>
+    </section>
+
+    <form id="composer" class="composer" autocomplete="off">
+      <div class="sheet-head"><strong>포스트잇 붙이기</strong><button id="sheetClose" type="button" class="icon-btn" aria-label="닫기">✕</button></div>
+      <p id="lockMsg" class="lockmsg" hidden>🔒 마감되어 더 이상 쓸 수 없어요. 공개된 메시지를 즐겨 주세요!</p>
+      <input id="author" maxlength="12" placeholder="닉네임 (비우면 익명)" aria-label="닉네임">
+      <div class="msgwrap">
+        <textarea id="message" maxlength="100" rows="3" placeholder="메시지를 남겨주세요 (100자)" aria-label="메시지"></textarea>
+        <span id="counter" class="counter">0/100</span>
+      </div>
+      <div class="row"><span class="lbl">색깔</span><div id="colors" class="colors"></div></div>
+      <div class="row"><span class="lbl">스티커</span><div id="emojis" class="emojis"></div></div>
+      <div class="row tools">
+        <label class="btn ghost small">📷 사진<input id="photoInput" type="file" accept="image/*" hidden></label>
+        <button id="promptBtn" class="btn ghost small" type="button">💡 오늘의 질문</button>
+        <span id="photoPreview" class="photo-prev" hidden><img id="photoThumb" alt="미리보기"><button id="photoClear" type="button" aria-label="사진 제거">✕</button></span>
+      </div>
+      <button id="submitBtn" class="btn primary" type="submit">붙이기</button>
+    </form>
+
+    <section class="boardwrap">
+      <div class="toolbar">
+        <div class="seg"><button data-sort="new" class="on" type="button">최신순</button><button data-sort="hearts" type="button">♥ 하트순</button></div>
+        <a id="switchView" class="link" href="#"></a>
+      </div>
+      <div id="board" class="board"></div>
+      <p id="empty" class="empty" hidden>아직 포스트잇이 없어요.<br>첫 번째 메시지를 붙여 보세요! 💌</p>
+    </section>
+  </main>
+
+  <button id="fab" class="fab" type="button" aria-label="글쓰기">✏️</button>
+  <div class="sheet-backdrop"></div>
+
+  <dialog id="inviteDlg"><div class="dlg">
+    <h2>팀원 초대하기</h2>
+    <div id="qr" class="qr"></div>
+    <input id="inviteUrl" readonly aria-label="초대 링크">
+    <div class="dlg-actions"><button id="copyBtn" class="btn primary" type="button">링크 복사</button><button class="btn ghost" type="button" data-close="#inviteDlg">닫기</button></div>
+  </div></dialog>
+
+  <dialog id="newDlg"><form id="newForm" class="dlg" autocomplete="off">
+    <h2>새 롤링페이퍼 만들기</h2>
+    <label>제목<input id="newTitle" maxlength="40" required placeholder="예: 민지님 생일 축하해요!"></label>
+    <label>마감 시간 (선택)<input id="newDeadline" type="datetime-local"></label>
+    <p class="hint">마감 전에는 내 글만 보이고, 마감되면 작성이 잠기며 모두 공개돼요.</p>
+    <div class="dlg-actions"><button class="btn primary" type="submit">만들기</button><button class="btn ghost" type="button" data-close="#newDlg">취소</button></div>
+  </form></dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+  <canvas id="fx" class="fx"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/store.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

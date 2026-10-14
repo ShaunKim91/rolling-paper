@@ -1,0 +1,25 @@
+{
+  "outputDirectory": "public",
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        { "type": "header", "key": "user-agent", "value": ".*(iPhone|iPod|Android.*Mobile|Windows Phone).*" }
+      ],
+      "missing": [{ "type": "query", "key": "view" }],
+      "destination": "/m/",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Vary", "value": "User-Agent" }
+      ]
+    }
+  ]
+}

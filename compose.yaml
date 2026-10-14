@@ -1,0 +1,9 @@
+services:
+  rolling-paper:
+    build: .
+    container_name: rolling-paper
+    ports:
+      - "127.0.0.1:4174:8080"
+    environment:
+      SERVICE_LIFETIME_SECONDS: "3600"   # 1시간 뒤 서버+공개 터널 자동 종료
+    restart: "no"

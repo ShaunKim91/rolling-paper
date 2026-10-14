@@ -1,0 +1,10 @@
+/* 데스크톱/태블릿: 왼쪽 고정 작성 패널 + 오른쪽 보드 */
+.layout { max-width: 1280px; margin: 0 auto; padding: 0 24px 40px; display: grid; grid-template-columns: 340px 1fr; grid-template-areas: "hero hero" "composer board"; gap: 8px 28px; align-items: start; }
+.hero { grid-area: hero; }
+.composer { grid-area: composer; position: sticky; top: 76px; }
+.boardwrap { grid-area: board; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; grid-template-areas: "hero" "composer" "board"; padding: 0 16px 40px; }
+  .composer { position: static; }
+}
